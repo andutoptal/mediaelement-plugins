@@ -30,7 +30,11 @@ Object.assign(mejs.MepDefaults, {
 	/**
 	 * @type {?String}
 	 */
-	speedText: null
+	speedText: null,
+	/**
+	 * @type {Boolean}
+	 */
+	speedSelectorOpenUpwards: true
 });
 
 Object.assign(MediaElementPlayer.prototype, {
@@ -146,7 +150,12 @@ Object.assign(MediaElementPlayer.prototype, {
 			player.speedButton.addEventListener(inEvents[i], () => {
 				mejs.Utils.removeClass(player.speedSelector, `${t.options.classPrefix}offscreen`);
 				player.speedSelector.style.height = player.speedSelector.querySelector('ul').offsetHeight;
-				player.speedSelector.style.top = `${(-1 * parseFloat(player.speedSelector.offsetHeight))}px`;
+
+				if (t.options.speedSelectorOpenUpwards) {
+					player.speedSelector.style.top = `${(-1 * parseFloat(player.speedSelector.offsetHeight))}px`;
+				} else {
+					player.speedSelector.style.top = '40px';
+				}
 			});
 		}
 
